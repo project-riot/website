@@ -10,12 +10,12 @@
 
     <title>rIoT</title>
     <link href="static/img/favicon.ico" type="image/x-icon" rel="icon">
-    
+
     <!-- Bootstrap core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link rel="stylesheet" href="static/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="heet" href="static/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/vendor/simple-line-icons/css/simple-line-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     <!-- Custom styles for this template -->
     <!-- <link href="css/new-age.min.css" rel="stylesheet"> -->
-    <link href="static/css/new-age.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
 
     <!-- Theme Copyright 2013-2018 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-new-age/blob/gh-pages/LICENSE) license. -->
 
@@ -119,15 +119,85 @@
     <section class="features" id="calculator">
       <div class="container">
         <div class="section-heading text-center">
-          <h2>Super Cool IoT DDoS Cost Calculator</h2>
+          <h2>IoT DDoS Consumer Cost Calculator</h2>
           <p class="text-muted">Discover how much a DDoS attack really costs</p>
-          <hr>
-          <p>
-              Perhaps eventually something like: <a href="https://www.akamai.com/uk/en/products/cloud-security/calculate-the-cost-of-ddos-attacks.jsp" target="_blank">the Akamai DDoS calculator</a>, but for more than just businesses.
-          </p>
         </div>
-        <div class="row h-100">
-            <iframe src="https://www.akamai.com/uk/en/products/cloud-security/calculate-the-cost-of-ddos-attacks.jsp" width="100%" height="400px">placeholder for our cost calculator</iframe>
+        <div class="row ">
+            <div class="cost-calculator">
+                <div style="padding-top: 20px;">
+                    <p style="text-align:center;">
+                        Number of Devices:
+                        <input type="number" name="Number of Devices" id="numDevices" value="10000" onchange="calculateTotalCost()">
+                    </p>
+                    <p style="text-align:center;">Adjust the percentages of each device type (<i>total: <span id="percent-total">100</span>%</i>)</p>
+
+                </div>
+
+                <div class="row device-composition">
+                    <div class="calc-left">
+                        % Devices in a <br><strong>Low Cost Electricity Zone</strong><br> (<i>$<span id="lowCostPrice">x</span> per kWh</i>)<br>
+
+                        Cameras <input type="number" name="low cost cameras" id="lc-cams" class="small-input" value="30" onchange="calculateTotalCost()">% (<i><span id="numLowCostCams">x</span> devices</i>) <br>
+
+                        DVRs <input type="number" name="low cost dvrs" id="lc-dvrs" class="small-input" value="20" onchange="calculateTotalCost()">% (<i><span id="numLowCostDvrs">x</span> devices</i>)
+                    </div>
+                    <div class="calc-left">
+                        % Devices in a <br><strong>Medium Cost Electricity Zone</strong><br> (<i>$<span id="medCostPrice">x</span> per kWh</i>)<br>
+
+                        Cameras <input type="number" name="low cost cameras" id="mc-cams" class="small-input" value="15" onchange="calculateTotalCost()">% (<i><span id="numMedCostCams">x</span> devices</i>) <br>
+
+                        DVRs <input type="number" name="low cost dvrs" id="mc-dvrs" class="small-input" value="10" onchange="calculateTotalCost()">% (<i><span id="numMedCostDvrs">x</span> devices</i>)
+                    </div>
+                    <div class="calc-left">
+                        % Devices in a <br><strong>High Cost Electricity Zone</strong><br> (<i>$<span id="highCostPrice">x</span> per kWh</i>)<br>
+
+                        Cameras <input type="number" name="low cost cameras" id="hc-cams" class="small-input" value="15" onchange="calculateTotalCost()">% (<i><span id="numHighCostCams">x</span> devices</i>) <br>
+
+                        DVRs <input type="number" name="low cost dvrs" id="hc-dvrs" class="small-input" value="10" onchange="calculateTotalCost()">% (<i><span id="numHighCostDvrs">x</span> devices</i>)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="calc-left">
+                        <p>
+                            total increased cost per hour: <br><b>$<span id="increasedCostPerHour">x</span></b>
+                        </p>
+                    </div>
+                    <div class="calc-left">
+                        <p>
+                            attack duration <br><input type="number" name="attack duration" id="duration" class="small-input" value="4" onchange="calculateTotalCost()"> hours
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background-color:#fdcc52;">
+                    <p style="text-align:center; font-size:150%;">
+                        TOTAL CONSUMER RESOURCE COST <br>
+                        <b>$<span id="totalCost">x</span></b>
+                    </p>
+                </div>
+                <br>
+                <p style="text-align:center;">Attack Profiles</p>
+                <div class="row">
+
+                    <span class="btn btn-outline btn-xl calc-left" onclick="krebsAttack()">
+                        KrebsOnSecurity Attack
+                    </span>
+
+
+                    <span class="btn btn-outline btn-xl calc-left" onclick="dynAttack()">
+                        Dyn Attack
+                    </span>
+
+
+                    <span class="btn btn-outline btn-xl calc-left" onclick="worstCaseAttack()">
+                        "Worst Case" Attack
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
       </div>
     </section>
@@ -173,7 +243,7 @@
 
     <!-- Custom scripts for this template -->
     <!-- <script src="js/new-age.min.js"></script> -->
-    <script src="static/js/new-age.js"></script>
+    <script src="static/js/script.js"></script>
 
   </body>
 
