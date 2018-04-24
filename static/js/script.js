@@ -116,3 +116,52 @@ function calculateTotalCost() {
     $("#totalCost").text(totalCost);
 
 }
+
+
+// PRESET ATTACK PROFILES
+
+function krebsAttack() {
+    $("#numDevices").val("107000");
+
+    $("#lc-cams").val(30);
+    $("#lc-dvrs").val(20);
+    $("#mc-cams").val(10);
+    $("#mc-dvrs").val(15);
+    $("#hc-cams").val(15);
+    $("#hc-dvrs").val(10);
+
+    $("#duration").val("8");
+
+    calculateTotalCost();
+}
+
+function dynAttack() {
+    $("#numDevices").val("180000");
+
+    $("#lc-cams").val(30);
+    $("#lc-dvrs").val(20);
+    $("#mc-cams").val(10);
+    $("#mc-dvrs").val(15);
+    $("#hc-cams").val(15);
+    $("#hc-dvrs").val(10);
+
+    $("#duration").val("4");
+
+    calculateTotalCost();
+}
+
+
+function worstCaseAttack() {
+    $("#numDevices").val("600000");
+
+    $("#lc-cams").val(1);
+    $("#lc-dvrs").val(4);
+    $("#mc-cams").val(3);
+    $("#mc-dvrs").val(2);
+    $("#hc-cams").val(55);
+    $("#hc-dvrs").val(35);
+
+    $("#duration").val("12");
+
+    calculateTotalCost();
+}

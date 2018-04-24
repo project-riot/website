@@ -122,7 +122,7 @@
           <h2>IoT DDoS Consumer Cost Calculator</h2>
           <p class="text-muted">Discover how much a DDoS attack really costs</p>
         </div>
-        <div class="row">
+        <div class="row ">
             <div class="cost-calculator">
                 <div style="padding-top: 20px;">
                     <p style="text-align:center;">
@@ -175,6 +175,25 @@
                         TOTAL CONSUMER RESOURCE COST <br>
                         <b>$<span id="totalCost">x</span></b>
                     </p>
+                </div>
+                <br>
+                <p style="text-align:center;">Attack Profiles</p>
+                <div class="row">
+
+                    <span class="btn btn-outline btn-xl calc-left" onclick="krebsAttack()">
+                        KrebsOnSecurity Attack
+                    </span>
+
+
+                    <span class="btn btn-outline btn-xl calc-left" onclick="dynAttack()">
+                        Dyn Attack
+                    </span>
+
+
+                    <span class="btn btn-outline btn-xl calc-left" onclick="worstCaseAttack()">
+                        "Worst Case" Attack
+                    </span>
+
                 </div>
 
             </div>
