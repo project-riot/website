@@ -120,96 +120,143 @@
       <div class="container">
         <div class="section-heading text-center">
           <h2>IoT DDoS Consumer Cost Calculator</h2>
-          <p class="text-muted">Discover how much a DDoS attack really costs</p>
+          <p class="text-muted">Explore the Costs of DDoS Attacks to Consumers</p>
+          <br>
         </div>
-        <div class="row ">
+        <div class="row">
             <div class="cost-calculator effect8">
-                <div style="padding-top: 20px;">
-                    <p style="text-align:center;">
-                        Number of Devices:
+                <div class="calc-header">
+                    <p>
+                        Total Number of Devices:
                         <input type="number" name="Number of Devices" id="numDevices" value="10000" onchange="calculateTotalCost()">
                     </p>
-                    <p style="text-align:center;">Adjust the percentages of each device type (<i>total: <span id="percent-total">100</span>%</i>)</p>
+                    <p>
+                        <small>Adjust the percentages of each device type (<i>total: <span id="percent-total">100</span>%</i>)</small>
+                    </p>
 
                 </div>
 
                 <div class="row device-composition">
                     <div class="calc-col">
-                        % Devices in a <br><strong>Low Cost Electricity Zone</strong><br> (<i>$<span id="lowCostPrice">x</span> per kWh</i>)<br>
-
-                        Cameras <input type="number" name="low cost cameras" id="lc-cams" class="small-input" value="30" onchange="calculateTotalCost()">% (<i><span id="numLowCostCams">x</span> devices</i>) <br>
-
-                        DVRs <input type="number" name="low cost dvrs" id="lc-dvrs" class="small-input" value="20" onchange="calculateTotalCost()">% (<i><span id="numLowCostDvrs">x</span> devices</i>)
+                        <div class="calc-col-header">
+                            % Devices in a <br>
+                            <strong>Low Cost Electricity Zone</strong><br>
+                            (<small>$<span id="lowCostPrice">x</span> per kWh)</small>
+                        </div>
+                        <div class="calc-col-body">
+                            <div class="row">
+                                <div class="device-pct-col">% Cameras</div>
+                                <input type="number" name="low-cost-cameras" id="lc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <div class="device-pct-col">
+                                    <small>(<i><span id="numLowCostCams">x</span> devices</i>)</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="device-pct-col">% DVRs</div>
+                                <input type="number" name="low-cost-dvrs" id="lc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <div class="device-pct-col">
+                                    <small>(<i><span id="numLowCostDvrs">x</span> devices</i>)</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="calc-col">
-                        % Devices in a <br><strong>Medium Cost Electricity Zone</strong><br> (<i>$<span id="medCostPrice">x</span> per kWh</i>)<br>
-
-                        Cameras <input type="number" name="low cost cameras" id="mc-cams" class="small-input" value="15" onchange="calculateTotalCost()">% (<i><span id="numMedCostCams">x</span> devices</i>) <br>
-
-                        DVRs <input type="number" name="low cost dvrs" id="mc-dvrs" class="small-input" value="10" onchange="calculateTotalCost()">% (<i><span id="numMedCostDvrs">x</span> devices</i>)
+                        <div class="calc-col-header">
+                            % Devices in a <br>
+                            <strong>Medium Cost Electricity Zone</strong><br>
+                            <small>($<span id="medCostPrice">x</span> per kWh)</small>
+                        </div>
+                        <div class="calc-col-body">
+                            <div class="row">
+                                <div class="device-pct-col">% Cameras</div>
+                                <input type="number" name="med-cost-cameras" id="mc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <div class="device-pct-col">
+                                    <small>(<i><span id="numMedCostCams">x</span> devices</i>)</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="device-pct-col">% DVRs</div>
+                                <input type="number" name="med-cost-dvrs" id="mc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <div class="device-pct-col">
+                                    <small>(<i><span id="numMedCostDvrs">x</span> devices</i>)</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="calc-col">
-                        % Devices in a <br><strong>High Cost Electricity Zone</strong><br> (<i>$<span id="highCostPrice">x</span> per kWh</i>)<br>
-
-                        Cameras <input type="number" name="low cost cameras" id="hc-cams" class="small-input" value="15" onchange="calculateTotalCost()">% (<i><span id="numHighCostCams">x</span> devices</i>) <br>
-
-                        DVRs <input type="number" name="low cost dvrs" id="hc-dvrs" class="small-input" value="10" onchange="calculateTotalCost()">% (<i><span id="numHighCostDvrs">x</span> devices</i>)
+                        <div class="calc-col-header">
+                            % Devices in a <br>
+                            <strong>High Cost Electricity Zone</strong><br>
+                            <small>($<span id="highCostPrice">x</span> per kWh)</small>
+                        </div>
+                        <div class="calc-col-body">
+                            <div class="row">
+                                <div class="device-pct-col">% Cameras</div>
+                                <input type="number" name="high-cost-cameras" id="hc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <div class="device-pct-col">
+                                    <small>(<i><span id="numHighCostCams">x</span> devices</i>)</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="device-pct-col">% DVRs</div>
+                                <input type="number" name="high-cost-dvrs" id="hc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <div class="device-pct-col">
+                                    <small>(<i><span id="numHighCostDvrs">x</span> devices</i>)</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="calc-col">
-                        <p>
-                            total increased cost per hour: <br><b>$<span id="increasedCostPerHour">x</span></b>
+                        <p class="calc-col-header">
+                            increased cost per hour
+                        </p>
+                        <p class="calc-col-body subtotal">
+                            $<span id="increasedCostPerHour">x</span>
                         </p>
                     </div>
                     <div class="calc-col">
-                        <p>
-                            attack duration <br><input type="number" name="attack duration" id="duration" class="small-input" value="4" onchange="calculateTotalCost()"> hours
+                        <p class="calc-col-header">
+                            attack duration
+                        </p>
+                        <p class="calc-col-body">
+                            <input type="number" name="attack-duration" id="duration" value="4" onchange="calculateTotalCost()"> hours
                         </p>
                     </div>
-                </div>
-
-                <div style="background-color:#ee6c4d;">
-                    <p style="text-align:center; font-size:150%;">
-                        TOTAL CONSUMER RESOURCE COST <br>
-                        <b>$<span id="totalCost">x</span></b>
-                    </p>
                 </div>
                 <br>
-                <p style="text-align:center;">Attack Profiles</p>
+                <div id="cost-total">
+                    TOTAL CONSUMER RESOURCE COST <br>
+                    <b>$<span id="totalCost">x</span></b>
+                </div>
+                <br>
+                <p style="text-align:center;">ATTACK PROFILES</p>
                 <div class="row">
-
-                    <span class="btn btn-outline btn-xl calc-col" onclick="krebsAttack()">
+                    <span class="btn btn-outline btn-xl calc-btn" onclick="krebsAttack()">
                         KrebsOnSecurity Attack
                     </span>
-
-
-                    <span class="btn btn-outline btn-xl calc-col" onclick="dynAttack()">
+                    <span class="btn btn-outline btn-xl calc-btn" onclick="dynAttack()">
                         Dyn Attack
                     </span>
-
-
-                    <span class="btn btn-outline btn-xl calc-col" onclick="worstCaseAttack()">
+                    <span class="btn btn-outline btn-xl calc-btn" onclick="worstCaseAttack()">
                         "Worst Case" Attack
                     </span>
-
                 </div>
-
             </div>
-
         </div>
       </div>
     </section>
 
-    <section class="download bg-secondary text-center" id="download">
+    <section class="features bg-secondary text-center" id="download">
       <div class="container">
         <div class="row">
           <div class="col-md-8 mx-auto">
             <h2 class="section-heading">Read the Full Report</h2>
             <p>Learn more about our research design, methodology, and findings in the full report.</p>
             <div class="badges">
-                <a href="static/rIoT_report.pdf" download="rIoT_report.pdf" class="btn btn-outline btn-xl js-scroll-trigger">Download the Report</a>
+                <a href="static/rIoT_report.pdf" download="rIoT_report.pdf" class="btn btn-outline btn-xl btn-clear js-scroll-trigger">Download the Report</a>
             </div>
           </div>
         </div>
