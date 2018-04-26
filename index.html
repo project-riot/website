@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>rIoT</title>
-    <link href="static/img/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="static/img/favicon-b.ico" type="image/x-icon" rel="icon">
 
     <!-- Bootstrap core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,9 +60,10 @@
         <div class="row h-100">
           <div class="col-lg-7 my-auto">
             <div class="header-content mx-auto">
-              <h1 class="mb-5">rIoT: Cybersecurity in the Internet of Things</h1>
-              <h5 class="mb-8">Kim Fong, Kurt Hepler, Rohit Raghavan, Peter Rowland</h5>
-              <div class="sponsor-logos">
+                <img src="static/img/logo.png" alt="">
+              <h2 class="mb-5 center">Regulating the Internet of Things</h2>
+              <h5 class="mb-8 center">Kim Fong, Kurt Hepler, Rohit Raghavan, Peter Rowland</h5>
+              <div class="sponsor-logos center">
                   <a href="https://www.ischool.berkeley.edu/" target="_blank">
                       <img src="static/img/logo-ischool-white.svg" class="img-logo" alt="UC Berkeley School of Information">
                   </a>
@@ -131,7 +132,7 @@
                         <input type="number" name="Number of Devices" id="numDevices" value="10000" onchange="calculateTotalCost()">
                     </p>
                     <p>
-                        <small>Adjust the percentages of each device type (<i>total: <span id="percent-total">100</span>%</i>)</small>
+                        <small>Select an attack profile or adjust the percentages of each device type. (<i>total: <span id="percent-total">100</span>%</i>)</small>
                     </p>
 
                 </div>
@@ -148,14 +149,14 @@
                                 <div class="device-pct-col">% Cameras</div>
                                 <input type="number" name="low-cost-cameras" id="lc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
-                                    <small>(<i><span id="numLowCostCams">x</span> devices</i>)</small>
+                                    <small><i><span id="numLowCostCams">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% DVRs</div>
                                 <input type="number" name="low-cost-dvrs" id="lc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
-                                    <small>(<i><span id="numLowCostDvrs">x</span> devices</i>)</small>
+                                    <small><i><span id="numLowCostDvrs">x</span> devices</i></small>
                                 </div>
                             </div>
                         </div>
@@ -169,16 +170,16 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="med-cost-cameras" id="mc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <input type="number" name="med-cost-cameras" id="mc-cams" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
-                                    <small>(<i><span id="numMedCostCams">x</span> devices</i>)</small>
+                                    <small><i><span id="numMedCostCams">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="med-cost-dvrs" id="mc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <input type="number" name="med-cost-dvrs" id="mc-dvrs" class="device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
-                                    <small>(<i><span id="numMedCostDvrs">x</span> devices</i>)</small>
+                                    <small><i><span id="numMedCostDvrs">x</span> devices</i></small>
                                 </div>
                             </div>
                         </div>
@@ -192,16 +193,16 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="high-cost-cameras" id="hc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <input type="number" name="high-cost-cameras" id="hc-cams" class="device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
-                                    <small>(<i><span id="numHighCostCams">x</span> devices</i>)</small>
+                                    <small><i><span id="numHighCostCams">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="high-cost-dvrs" id="hc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <input type="number" name="high-cost-dvrs" id="hc-dvrs" class="device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
-                                    <small>(<i><span id="numHighCostDvrs">x</span> devices</i>)</small>
+                                    <small><i><span id="numHighCostDvrs">x</span> devices</i></small>
                                 </div>
                             </div>
                         </div>
