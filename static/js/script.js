@@ -47,8 +47,6 @@
 // COST CALCULATOR
 //////////////////
 
-
-
 function calculateTotalCost() {
 
     var numDevices = Number($("#numDevices").val());
@@ -82,12 +80,12 @@ function calculateTotalCost() {
     var numMedCostDvrs = (pctMedCostDvrs / 100) * numDevices;
     var numHighCostCams = (pctHighCostCams / 100) * numDevices;
     var numHighCostDvrs = (pctHighCostDvrs / 100) * numDevices;
-    $("#numLowCostCams").text(numLowCostCams);
-    $("#numLowCostDvrs").text(numLowCostDvrs);
-    $("#numMedCostCams").text(numMedCostCams);
-    $("#numMedCostDvrs").text(numMedCostDvrs);
-    $("#numHighCostCams").text(numHighCostCams);
-    $("#numHighCostDvrs").text(numHighCostDvrs);
+    $("#numLowCostCams").text(Math.round(numLowCostCams));
+    $("#numLowCostDvrs").text(Math.round(numLowCostDvrs));
+    $("#numMedCostCams").text(Math.round(numMedCostCams));
+    $("#numMedCostDvrs").text(Math.round(numMedCostDvrs));
+    $("#numHighCostCams").text(Math.round(numHighCostCams));
+    $("#numHighCostDvrs").text(Math.round(numHighCostDvrs));
 
     // increased usage in kWh
     var lcCamIncreasedUsage = numLowCostCams * camElectricityIncrease;
