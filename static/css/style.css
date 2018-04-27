@@ -293,38 +293,38 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 
 
 .text-primary {
-  color: #ee6c4d;
+    color: #ee6c4d;
 }
 
 .no-gutter > [class*='col-'] {
-  padding-right: 0;
-  padding-left: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .btn-outline {
-  color: #293241;
-  border: 1px solid;
-  border-color: #293241;
+    color: #293241;
+    border: 1px solid;
+    border-color: #293241;
 }
 
 .btn-outline:hover, .btn-outline:focus, .btn-outline:active, .btn-outline.active {
-  color: white;
-  border-color: #3d5a80;
-  /*background-color: #3d5a80;*/
-  background-color: rgba(61, 90, 128, 0.7);
+    color: white;
+    border-color: #3d5a80;
+    /*background-color: #3d5a80;*/
+    background-color: rgba(61, 90, 128, 0.7);
 }
 
 .btn {
-  border-radius: 10px;
-  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
-  letter-spacing: 2px;
-  /*text-transform: uppercase;*/
-  background-color: rgba(61, 90, 128, 0.2);
+    border-radius: 5px;
+    font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+    letter-spacing: 2px;
+    /*text-transform: uppercase;*/
+    background-color: rgba(61, 90, 128, 0.2);
 }
 
 .btn-xl {
-  font-size: 15px;
-  padding: 15px 25px;
+    font-size: 15px;
+    padding: 15px 25px;
 }
 
 .btn-clear {
@@ -339,15 +339,29 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 
 /* custom */
 
+.pill {
+    width: 120px;
+    padding: 5px 15px;
+    margin: 5px 15px 40px 15px;
+}
+
+.center-pills {
+    display: flex;
+    justify-content: center;
+}
 
 .center {
     text-align: center;
 }
 
+.subtitle {
+    color: #ee6c4d;
+    font-weight: 500;
+}
+
 .sponsor-logos {
     padding-top: 50px;
 }
-
 
 .img-logo {
     max-height: 70px;
@@ -355,9 +369,8 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     padding: 5px 10px 0 0;
 }
 
-.img-center {
-    margin: 0 auto;
-    padding: 0;
+.title-logo {
+    width: 75%;
 }
 
 input {
