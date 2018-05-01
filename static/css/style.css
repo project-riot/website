@@ -339,17 +339,6 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 
 /* custom */
 
-.pill {
-    width: 120px;
-    padding: 5px 15px;
-    margin: 5px 15px 40px 15px;
-}
-
-.center-pills {
-    display: flex;
-    justify-content: center;
-}
-
 .center {
     text-align: center;
 }
