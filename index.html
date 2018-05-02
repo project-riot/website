@@ -122,13 +122,13 @@
         </div>
         <div class="row">
             <div class="cost-calculator effect8">
-                <div class="calc-header">
-                    <p>
-                        <small>Select an attack profile or adjust the percentages of each device type. (<i>elec total: <span id="elec_percent-total">100</span>%</i>)
-                            (<i>band total: <span id="band_percent-total">100</span>%</i>)
+                <div class="calc-header wide">
+                    <!-- <p> -->
+                        <small class="calc-col-header">Adjust the calculator to compute costs, or select a preset attack profile <br>
+                            <!-- (<i>band total: <span id="band_percent-total">100</span>%</i>) -->
                         </small>
-                    </p>
-
+                    <!-- </p> -->
+                    <br>
                 </div>
 
                 <div class="row">
@@ -137,7 +137,7 @@
                             Total Number of Devices
                         </p>
                         <p class="calc-col-body subtotal">
-                            <input type="number" name="Number of Devices" class="input-box" id="numDevices" value="100" onchange="calculateTotalCost()">
+                            <input type="number" name="Number of Devices" class="input-box" id="numDevices" value="500" onchange="calculateTotalCost()">
                         </p>
                     </div>
                     <div class="calc-col">
@@ -148,39 +148,75 @@
                             <input type="number" name="attack-duration" class="input-box device-pct-col" id="duration" value="4" onchange="calculateTotalCost()"> hours
                         </p>
                     </div>
-                    <div class="calc-col no-bg">
-                        <div class="dropdown left">
-                            <button class="btn btn-outline dropdown-toggle calc-dropdown-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Attack Type: <span id="attackType">TCP</span>
+                    <div class="calc-col">
+                        <div class="dropdown center ">
+                            <button class="btn btn-outline dropdown-toggle calc-dropdown-btn no-bg calc-col-header " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Attack Type:
                             </button>
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <li><span class="dropdown-item">TCP</span></li>
                                 <li><span class="dropdown-item">UDP</span></li>
                                 <li><span class="dropdown-item">Scan</span></li>
                             </div>
                         </div>
+                        <p class="calc-col-body">
+                            <span id="attackType" class="input-box device-pct-col no-bg">TCP</span>
+                        </p>
                     </div>
                 </div>
-
-
-
-                <div class="row device-composition">
-                    <div class="calc-col wide">
-                        <section class="range-slider center">
-                          <span class="rangeValues"></span>
-                          <input value="40" min="0" max="100" step="0.25" type="range" class="slider-input">
-                          <input value="75" min="0" max="100" step="0.25" type="range" class="slider-input">
-                        </section>
-                    </div>
-                </div>
-
-
-
 
 
                 <br>
+                <div class="row">
+                    <div class="calc-col wide">
+                        <p class="calc-col-header">
+                            Number of Devices in Low, Medium, and High Cost Electricity Zones
+                        </p>
+                        <!-- <small id="slider-adjust-note">Adjust slider to change device distribution</small> -->
+                        <section class="range-slider center">
+                          <!-- <span class="rangeValues"></span> -->
+                          <input value="33" min="0" max="100" step="1" type="range" class="slider-input">
+                          <input value="66" min="0" max="100" step="1" type="range" class="slider-input">
+                        </section>
+                        <div class="row device-composition short">
+                            <div class="calc-col no-bg ">
+                                <p class="calc-col-body percent-total">
+                                    <span id="elec_lowCostPct">x</span>%
+                                </p>
+                                <p class="calc-col-header">
+                                    low-cost zone <br>
+                                    (<small><i><span id="elec_numLowCost">x</span> devices</i></small>)
+                                </p>
 
-                <div class="row device-composition">
+                            </div>
+                            <div class="calc-col no-bg ">
+                                <p class="calc-col-body percent-total">
+                                    <span id="elec_medCostPct">x</span>%
+                                </p>
+                                <p class="calc-col-header">
+                                    med-cost zone <br>
+                                    (<small><i><span id="elec_numMedCost">x</span> devices</i></small>)
+                                </p>
+
+                            </div>
+                            <div class="calc-col no-bg ">
+                                <p class="calc-col-body percent-total">
+                                    <span id="elec_highCostPct">x</span>%
+                                </p>
+                                <p class="calc-col-header">
+                                    high-cost zone <br>
+                                    (<small><i><span id="elec_numHighCost">x</span> devices</i></small>)
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- <div class="row device-composition">
                     <div class="calc-col">
                         <div class="calc-col-header">
                             % Devices in a <br>
@@ -250,7 +286,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <!-- BANDWIDTH CONSUMPTION -->

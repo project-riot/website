@@ -53,7 +53,7 @@
             }
         }
     }
-
+    // getVals();
 
     calculateTotalCost();
 
@@ -66,7 +66,6 @@
 
 function getVals(){
     // Get slider values
-    var parent = this.parentNode;
     var slides = $(".slider-input");
     var slide1 = parseFloat( slides[0].value );
     var slide2 = parseFloat( slides[1].value );
@@ -75,11 +74,15 @@ function getVals(){
         var tmp = slide2; slide2 = slide1; slide1 = tmp;
     }
 
-    var displayElement = parent.getElementsByClassName("rangeValues")[0];
     var lowCostPct = slide1;
     var medCostPct = slide2 - slide1;
     var highCostPct = 100 - slide2;
-    displayElement.innerHTML = lowCostPct + "% low cost <br>" + medCostPct + "% med cost <br>" + highCostPct + "% high cost";
+
+    $("#elec_lowCostPct").text(lowCostPct);
+    $("#elec_medCostPct").text(medCostPct);
+    $("#elec_highCostPct").text(highCostPct);
+
+    calculateTotalCost();
 }
 
 
@@ -100,6 +103,7 @@ function calculateTotalCost() {
     // usage increases per kWh
     const elec_camElectricityIncrease = 0.0001;
     const elec_dvrElectricityIncrease = 0.0001;
+    const elec_electricityIncrease = 0.0001;
 
     // electricity prices
     const elec_lowCostPrice = 0.1;
@@ -110,47 +114,70 @@ function calculateTotalCost() {
     $("#elec_highCostPrice").text(elec_highCostPrice);
 
     // get the device composition
-    var elec_pctLowCostCams = Number($("#elec_lc-cams").val());
-    var elec_pctLowCostDvrs = Number($("#elec_lc-dvrs").val());
-    var elec_pctMedCostCams = Number($("#elec_mc-cams").val());
-    var elec_pctMedCostDvrs = Number($("#elec_mc-dvrs").val());
-    var elec_pctHighCostCams = Number($("#elec_hc-cams").val());
-    var elec_pctHighCostDvrs = Number($("#elec_hc-dvrs").val());
-    var elec_pctTotal = elec_pctLowCostCams + elec_pctLowCostDvrs + elec_pctMedCostCams + elec_pctMedCostDvrs + elec_pctHighCostCams + elec_pctHighCostDvrs;
-    $("#elec_percent-total").text(elec_pctTotal);
+    // var elec_pctLowCostCams = Number($("#elec_lc-cams").val());
+    // var elec_pctLowCostDvrs = Number($("#elec_lc-dvrs").val());
+    // var elec_pctMedCostCams = Number($("#elec_mc-cams").val());
+    // var elec_pctMedCostDvrs = Number($("#elec_mc-dvrs").val());
+    // var elec_pctHighCostCams = Number($("#elec_hc-cams").val());
+    // var elec_pctHighCostDvrs = Number($("#elec_hc-dvrs").val());
+    // var elec_pctTotal = elec_pctLowCostCams + elec_pctLowCostDvrs + elec_pctMedCostCams + elec_pctMedCostDvrs + elec_pctHighCostCams + elec_pctHighCostDvrs;
+    // $("#elec_percent-total").text(elec_pctTotal);
 
     // calculate number of devices
-    var elec_numLowCostCams = (elec_pctLowCostCams / 100) * numDevices;
-    var elec_numLowCostDvrs = (elec_pctLowCostDvrs / 100) * numDevices;
-    var elec_numMedCostCams = (elec_pctMedCostCams / 100) * numDevices;
-    var elec_numMedCostDvrs = (elec_pctMedCostDvrs / 100) * numDevices;
-    var elec_numHighCostCams = (elec_pctHighCostCams / 100) * numDevices;
-    var elec_numHighCostDvrs = (elec_pctHighCostDvrs / 100) * numDevices;
-    $("#elec_numLowCostCams").text(Math.round(elec_numLowCostCams));
-    $("#elec_numLowCostDvrs").text(Math.round(elec_numLowCostDvrs));
-    $("#elec_numMedCostCams").text(Math.round(elec_numMedCostCams));
-    $("#elec_numMedCostDvrs").text(Math.round(elec_numMedCostDvrs));
-    $("#elec_numHighCostCams").text(Math.round(elec_numHighCostCams));
-    $("#elec_numHighCostDvrs").text(Math.round(elec_numHighCostDvrs));
+    // var elec_numLowCostCams = (elec_pctLowCostCams / 100) * numDevices;
+    // var elec_numLowCostDvrs = (elec_pctLowCostDvrs / 100) * numDevices;
+    // var elec_numMedCostCams = (elec_pctMedCostCams / 100) * numDevices;
+    // var elec_numMedCostDvrs = (elec_pctMedCostDvrs / 100) * numDevices;
+    // var elec_numHighCostCams = (elec_pctHighCostCams / 100) * numDevices;
+    // var elec_numHighCostDvrs = (elec_pctHighCostDvrs / 100) * numDevices;
+    // $("#elec_numLowCostCams").text(Math.round(elec_numLowCostCams));
+    // $("#elec_numLowCostDvrs").text(Math.round(elec_numLowCostDvrs));
+    // $("#elec_numMedCostCams").text(Math.round(elec_numMedCostCams));
+    // $("#elec_numMedCostDvrs").text(Math.round(elec_numMedCostDvrs));
+    // $("#elec_numHighCostCams").text(Math.round(elec_numHighCostCams));
+    // $("#elec_numHighCostDvrs").text(Math.round(elec_numHighCostDvrs));
+
+    // var elec_numHighCost = elec_numHighCostCams +
+
+    // now using slider for electricity
+    var elec_lowCostPct = Number($("#elec_lowCostPct").text());
+    var elec_medCostPct = Number($("#elec_medCostPct").text());
+    var elec_highCostPct = Number($("#elec_highCostPct").text());
+
+    var elec_numLowCost = elec_lowCostPct / 100.0 * numDevices;
+    var elec_numMedCost = elec_medCostPct / 100.0 * numDevices;
+    var elec_numHighCost = elec_highCostPct / 100.0 * numDevices;
+
+    $("#elec_numLowCost").text(Math.round(elec_numLowCost));
+    $("#elec_numMedCost").text(Math.round(elec_numMedCost));
+    $("#elec_numHighCost").text(Math.round(elec_numHighCost));
 
     // increased usage in kWh
-    var elec_lcCamIncreasedUsage = elec_numLowCostCams * elec_camElectricityIncrease;
-    var elec_lcDvrIncreasedUsage = elec_numLowCostDvrs * elec_dvrElectricityIncrease;
-    var elec_mcCamIncreasedUsage = elec_numMedCostCams * elec_camElectricityIncrease;
-    var elec_mcDvrIncreasedUsage = elec_numMedCostDvrs * elec_dvrElectricityIncrease;
-    var elec_hcCamIncreasedUsage = elec_numHighCostCams * elec_camElectricityIncrease;
-    var elec_hcDvrIncreasedUsage = elec_numHighCostDvrs * elec_dvrElectricityIncrease;
+    // var elec_lcCamIncreasedUsage = elec_numLowCostCams * elec_camElectricityIncrease;
+    // var elec_lcDvrIncreasedUsage = elec_numLowCostDvrs * elec_dvrElectricityIncrease;
+    // var elec_mcCamIncreasedUsage = elec_numMedCostCams * elec_camElectricityIncrease;
+    // var elec_mcDvrIncreasedUsage = elec_numMedCostDvrs * elec_dvrElectricityIncrease;
+    // var elec_hcCamIncreasedUsage = elec_numHighCostCams * elec_camElectricityIncrease;
+    // var elec_hcDvrIncreasedUsage = elec_numHighCostDvrs * elec_dvrElectricityIncrease;
+    var elec_lcIncreasedUsage = elec_numLowCost * elec_electricityIncrease;
+    var elec_mcIncreasedUsage = elec_numMedCost * elec_electricityIncrease;
+    var elec_hcIncreasedUsage = elec_numHighCost * elec_electricityIncrease;
 
     // increased cost per device and zone
-    var elec_lcCamIncreasedCost = elec_lcCamIncreasedUsage * elec_lowCostPrice;
-    var elec_lcDvrIncreasedCost = elec_lcDvrIncreasedUsage * elec_lowCostPrice;
-    var elec_mcCamIncreasedCost = elec_mcCamIncreasedUsage * elec_medCostPrice;
-    var elec_mcDvrIncreasedCost = elec_mcDvrIncreasedUsage * elec_medCostPrice;
-    var elec_hcCamIncreasedCost = elec_hcCamIncreasedUsage * elec_highCostPrice;
-    var elec_hcDvrIncreasedCost = elec_hcDvrIncreasedUsage * elec_highCostPrice;
+    // var elec_lcCamIncreasedCost = elec_lcCamIncreasedUsage * elec_lowCostPrice;
+    // var elec_lcDvrIncreasedCost = elec_lcDvrIncreasedUsage * elec_lowCostPrice;
+    // var elec_mcCamIncreasedCost = elec_mcCamIncreasedUsage * elec_medCostPrice;
+    // var elec_mcDvrIncreasedCost = elec_mcDvrIncreasedUsage * elec_medCostPrice;
+    // var elec_hcCamIncreasedCost = elec_hcCamIncreasedUsage * elec_highCostPrice;
+    // var elec_hcDvrIncreasedCost = elec_hcDvrIncreasedUsage * elec_highCostPrice;
+    var elec_lcIncreasedCost = elec_lcIncreasedUsage * elec_lowCostPrice;
+    var elec_mcIncreasedCost = elec_mcIncreasedUsage * elec_medCostPrice;
+    var elec_hcIncreasedCost = elec_hcIncreasedUsage * elec_highCostPrice;
 
     //  cost per hour across all devices
-    var elec_increasedCostPerHour = elec_lcCamIncreasedCost + elec_lcDvrIncreasedCost + elec_mcCamIncreasedCost + elec_mcDvrIncreasedCost + elec_hcCamIncreasedCost + elec_hcDvrIncreasedCost;
+    // var elec_increasedCostPerHour = elec_lcCamIncreasedCost + elec_lcDvrIncreasedCost + elec_mcCamIncreasedCost + elec_mcDvrIncreasedCost + elec_hcCamIncreasedCost + elec_hcDvrIncreasedCost;
+    var elec_increasedCostPerHour = elec_lcIncreasedCost + elec_mcIncreasedCost + elec_hcIncreasedCost;
+
     var elec_roundedIncreasedCostPerHour = elec_increasedCostPerHour.toFixed(2)
     $("#elec_increasedCostPerHour").text(elec_roundedIncreasedCostPerHour);
 
@@ -163,9 +190,9 @@ function calculateTotalCost() {
     ///////////////////
 
     // bandwidth costs
-    const band_lowCostPrice = 2;
-    const band_medCostPrice = 3;
-    const band_highCostPrice = 4;
+    const band_lowCostPrice = .2;
+    const band_medCostPrice = .3;
+    const band_highCostPrice = .4;
     $("#band_lowCostPrice").text(band_lowCostPrice);
     $("#band_medCostPrice").text(band_medCostPrice);
     $("#band_highCostPrice").text(band_highCostPrice);
@@ -267,12 +294,16 @@ function krebsAttack() {
     $("#duration").val("77");
     $("#attackType").text("TCP");
 
-    $("#elec_lc-cams").val(30);
-    $("#elec_lc-dvrs").val(20);
-    $("#elec_mc-cams").val(10);
-    $("#elec_mc-dvrs").val(15);
-    $("#elec_hc-cams").val(15);
-    $("#elec_hc-dvrs").val(10);
+    // $("#elec_lc-cams").val(30);
+    // $("#elec_lc-dvrs").val(20);
+    // $("#elec_mc-cams").val(10);
+    // $("#elec_mc-dvrs").val(15);
+    // $("#elec_hc-cams").val(15);
+    // $("#elec_hc-dvrs").val(10);
+
+    $("#elec_lowCostPct").text(50);
+    $("#elec_medCostPct").text(25);
+    $("#elec_highCostPct").text(25);
 
     $("#band_lc-eth").val(30);
     $("#band_lc-wifi").val(20);
@@ -289,12 +320,16 @@ function dynAttack() {
     $("#duration").val("6");
     $("#attackType").text("TCP");
 
-    $("#elec_lc-cams").val(30);
-    $("#elec_lc-dvrs").val(20);
-    $("#elec_mc-cams").val(10);
-    $("#elec_mc-dvrs").val(15);
-    $("#elec_hc-cams").val(15);
-    $("#elec_hc-dvrs").val(10);
+    // $("#elec_lc-cams").val(30);
+    // $("#elec_lc-dvrs").val(20);
+    // $("#elec_mc-cams").val(10);
+    // $("#elec_mc-dvrs").val(15);
+    // $("#elec_hc-cams").val(15);
+    // $("#elec_hc-dvrs").val(10);
+
+    $("#elec_lowCostPct").text(50);
+    $("#elec_medCostPct").text(25);
+    $("#elec_highCostPct").text(25);
 
     $("#band_lc-eth").val(15);
     $("#band_lc-wifi").val(15);
@@ -312,12 +347,16 @@ function worstCaseAttack() {
     $("#duration").val("50");
     $("#attackType").text("UDP");
 
-    $("#elec_lc-cams").val(1);
-    $("#elec_lc-dvrs").val(4);
-    $("#elec_mc-cams").val(3);
-    $("#elec_mc-dvrs").val(2);
-    $("#elec_hc-cams").val(55);
-    $("#elec_hc-dvrs").val(35);
+    // $("#elec_lc-cams").val(1);
+    // $("#elec_lc-dvrs").val(4);
+    // $("#elec_mc-cams").val(3);
+    // $("#elec_mc-dvrs").val(2);
+    // $("#elec_hc-cams").val(55);
+    // $("#elec_hc-dvrs").val(35);
+
+    $("#elec_lowCostPct").text(5);
+    $("#elec_medCostPct").text(5);
+    $("#elec_highCostPct").text(90);
 
     $("#band_lc-eth").val(5);
     $("#band_lc-wifi").val(5);
@@ -328,55 +367,3 @@ function worstCaseAttack() {
 
     calculateTotalCost();
 }
-
-function raphit () {
-    var r = Raphael("holder");
-
-    r.customAttributes.segment = function (x, y, r, a1, a2) {
-        var flag = (a2 - a1) > 180,
-            clr = (a2 - a1) / 360;
-        a1 = (a1 % 360) * Math.PI / 180;
-        a2 = (a2 % 360) * Math.PI / 180;
-        return {
-            path: [["M", x, y], ["l", r * Math.cos(a1), r * Math.sin(a1)], ["A", r, r, 0, +flag, 1, x + r * Math.cos(a2), y + r * Math.sin(a2)], ["z"]],
-            fill: "hsb(" + clr + ", .75, .8)"
-        };
-    };
-
-    function animate(ms) {
-        var start = 0,
-            val;
-        for (i = 0; i < ii; i++) {
-            val = 360 / total * data[i];
-            paths[i].animate({segment: [200, 200, 150, start, start += val]}, ms || 1500, "bounce");
-            paths[i].angle = start - val / 2;
-        }
-    }
-
-    var data = [24, 92, 24, 52, 78, 99, 82, 27],
-        paths = r.set(),
-        total,
-        start,
-        bg = r.circle(200, 200, 0).attr({stroke: "#fff", "stroke-width": 4});
-    data = data.sort(function (a, b) { return b - a;});
-
-    total = 0;
-    for (var i = 0, ii = data.length; i < ii; i++) {
-        total += data[i];
-    }
-    start = 0;
-    for (i = 0; i < ii; i++) {
-        var val = 360 / total * data[i];
-        (function (i, val) {
-            paths.push(r.path().attr({segment: [200, 200, 1, start, start + val], stroke: "#fff"}).click(function () {
-                total += data[i];
-                data[i] *= 2;
-                animate();
-            }));
-        })(i, val);
-        start += val;
-    }
-    bg.animate({r: 151}, 1000, "bounce");
-    animate(1000);
-    var t = r.text(200, 20, "Click on segments to make them bigger.").attr({font: '100 20px "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif', fill: "#fff"});
-};
