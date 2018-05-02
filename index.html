@@ -137,7 +137,7 @@
                             Total Number of Devices
                         </p>
                         <p class="calc-col-body subtotal">
-                            <input type="number" name="Number of Devices" id="numDevices" value="100" onchange="calculateTotalCost()">
+                            <input type="number" name="Number of Devices" class="input-box" id="numDevices" value="100" onchange="calculateTotalCost()">
                         </p>
                     </div>
                     <div class="calc-col">
@@ -145,7 +145,7 @@
                             attack duration
                         </p>
                         <p class="calc-col-body">
-                            <input type="number" name="attack-duration" id="duration" value="4" onchange="calculateTotalCost()"> hours
+                            <input type="number" name="attack-duration" class="input-box device-pct-col" id="duration" value="4" onchange="calculateTotalCost()"> hours
                         </p>
                     </div>
                     <div class="calc-col no-bg">
@@ -162,7 +162,23 @@
                     </div>
                 </div>
 
-                <!-- ELECTRICY CONSUMPTION -->
+
+
+                <div class="row device-composition">
+                    <div class="calc-col wide">
+                        <section class="range-slider center">
+                          <span class="rangeValues"></span>
+                          <input value="40" min="0" max="100" step="0.25" type="range" class="slider-input">
+                          <input value="75" min="0" max="100" step="0.25" type="range" class="slider-input">
+                        </section>
+                    </div>
+                </div>
+
+
+
+
+
+                <br>
 
                 <div class="row device-composition">
                     <div class="calc-col">
@@ -174,14 +190,14 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="elec_low-cost-cameras" id="elec_lc-cams" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <input type="number" name="elec_low-cost-cameras" id="elec_lc-cams" class="input-box device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="elec_numLowCostCams">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="elec_low-cost-dvrs" id="elec_lc-dvrs" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <input type="number" name="elec_low-cost-dvrs" id="elec_lc-dvrs" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="elec_numLowCostDvrs">x</span> devices</i></small>
                                 </div>
@@ -197,14 +213,14 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="elec_med-cost-cameras" id="elec_mc-cams" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <input type="number" name="elec_med-cost-cameras" id="elec_mc-cams" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="elec_numMedCostCams">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="elec_med-cost-dvrs" id="elec_mc-dvrs" class="device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
+                                <input type="number" name="elec_med-cost-dvrs" id="elec_mc-dvrs" class="input-box device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="elec_numMedCostDvrs">x</span> devices</i></small>
                                 </div>
@@ -220,14 +236,14 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="elec_high-cost-cameras" id="elec_hc-cams" class="device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
+                                <input type="number" name="elec_high-cost-cameras" id="elec_hc-cams" class="input-box device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="elec_numHighCostCams">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="elec_high-cost-dvrs" id="elec_hc-dvrs" class="device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
+                                <input type="number" name="elec_high-cost-dvrs" id="elec_hc-dvrs" class="input-box device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="elec_numHighCostDvrs">x</span> devices</i></small>
                                 </div>
@@ -249,14 +265,14 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Ethernet</div>
-                                <input type="number" name="band_low-cost-eth" id="band_lc-eth" class="device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
+                                <input type="number" name="band_low-cost-eth" id="band_lc-eth" class="input-box device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="band_numLowCostEth">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% WiFi</div>
-                                <input type="number" name="band_low-cost-wifi" id="band_lc-wifi" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <input type="number" name="band_low-cost-wifi" id="band_lc-wifi" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="band_numLowCostWifi">x</span> devices</i></small>
                                 </div>
@@ -272,14 +288,14 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Ethernet</div>
-                                <input type="number" name="band_med-cost-eth" id="band_mc-eth" class="device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
+                                <input type="number" name="band_med-cost-eth" id="band_mc-eth" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="band_numMedCostEth">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% WiFi</div>
-                                <input type="number" name="band_med-cost-wifi" id="band_mc-wifi" class="device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
+                                <input type="number" name="band_med-cost-wifi" id="band_mc-wifi" class="input-box device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="band_numMedCostWifi">x</span> devices</i></small>
                                 </div>
@@ -295,14 +311,14 @@
                         <div class="calc-col-body">
                             <div class="row">
                                 <div class="device-pct-col">% Ethernet</div>
-                                <input type="number" name="band_high-cost-eth" id="band_hc-eth" class="device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
+                                <input type="number" name="band_high-cost-eth" id="band_hc-eth" class="input-box device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="band_numHighCostEth">x</span> devices</i></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="device-pct-col">% WiFi</div>
-                                <input type="number" name="band_high-cost-wifi" id="band_hc-wifi" class="device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
+                                <input type="number" name="band_high-cost-wifi" id="band_hc-wifi" class="input-box device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
                                 <div class="device-pct-col">
                                     <small><i><span id="band_numHighCostWifi">x</span> devices</i></small>
                                 </div>
