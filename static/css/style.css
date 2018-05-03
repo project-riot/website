@@ -392,7 +392,7 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 
 .percent-total {
     font-weight: 800;
-    padding-left: 12px !important;
+    padding-left: 7px !important;
     padding-bottom: 0 !important;
     font-size: 125%;
 }
@@ -422,11 +422,18 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     background-color: rgba(61, 90, 128, 0.05);
 }
 
+.no-outline {
+    outline:0 !important;
+    -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
 .dropdown-menu {
     padding: 0;
     text-align: center;
     border: solid 1px #87a2c5;
-    background-color: rgba(51, 80, 118, 0.5);
+    background-color: rgba(51, 80, 118, 0.7);
 }
 
 .dropdown-item {
@@ -461,7 +468,11 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 }
 
 .calc-col.wide {
-    width: 70%;
+    width: 96.5%;
+}
+
+.calc-col.slim {
+    width: 50%;
 }
 
 .calc-col.short {
@@ -488,13 +499,18 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     border-radius: 5px;
 }
 
+.device-composition.short {
+    padding: 0;
+    border-radius: 5px;
+}
+
 .calc-col-header {
-    padding: 5px 0 5px 0;
+    padding: 0;
     text-transform: uppercase;
 }
 
 .calc-col-body {
-    padding: 0 0 15px 0;
+    padding: 0 0 5px 0;
     width: 100% ;
     margin: 0 auto;
 }
@@ -579,6 +595,10 @@ section.range-slider {
     padding: 0;
 }
 
+.slider-input.light {
+    background-color: rgba(61, 90, 128, 0.08);
+}
+
 .slider-input:hover {
     opacity: 1;
 }
@@ -592,8 +612,8 @@ section.range-slider {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
-    height: 45px;
-    background-color: rgba(61, 90, 128, 0.15);
+    height: 50px;
+    background-color: rgba(61, 90, 128, 0.45);
     cursor: pointer;
 
     border: 3px solid rgba(61, 90, 128, 0.95);

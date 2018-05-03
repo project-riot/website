@@ -41,19 +41,29 @@
 
 
     // initialize Sliders
-    // https://stackoverflow.com/questions/4753946/html5-slider-with-two-inputs-possible
-    var sliderSections = document.getElementsByClassName("range-slider");
-    for( var x = 0; x < sliderSections.length; x++ ){
-        var sliders = sliderSections[x].getElementsByTagName("input");
+    // stackoverflow.com/questions/4753946/html5-slider-with-two-inputs-possible
+    var elec_sliderSections = document.getElementsByClassName("elec_range-slider");
+    for( var x = 0; x < elec_sliderSections.length; x++ ){
+        var sliders = elec_sliderSections[x].getElementsByTagName("input");
         for( var y = 0; y < sliders.length; y++ ){
             if( sliders[y].type ==="range" ){
-                sliders[y].oninput = getVals;
+                sliders[y].oninput = getElectricityVals;
                 // Manually trigger event first time to display values
                 sliders[y].oninput();
             }
         }
     }
-    // getVals();
+    var band_sliderSections = document.getElementsByClassName("band_range-slider");
+    for( var x = 0; x < band_sliderSections.length; x++ ){
+        var sliders = band_sliderSections[x].getElementsByTagName("input");
+        for( var y = 0; y < sliders.length; y++ ){
+            if( sliders[y].type ==="range" ){
+                sliders[y].oninput = getBandwidthVals;
+                // Manually trigger event first time to display values
+                sliders[y].oninput();
+            }
+        }
+    }
 
     calculateTotalCost();
 
@@ -64,9 +74,9 @@
 })(jQuery); // End of use strict
 
 
-function getVals(){
+function getElectricityVals(){
     // Get slider values
-    var slides = $(".slider-input");
+    var slides = $(".elec_slider-input");
     var slide1 = parseFloat( slides[0].value );
     var slide2 = parseFloat( slides[1].value );
     // Neither slider will clip the other, so make sure we determine which is larger
@@ -83,6 +93,64 @@ function getVals(){
     $("#elec_highCostPct").text(highCostPct);
 
     calculateTotalCost();
+}
+
+function getBandwidthVals(){
+    // Get slider values
+    var slides = $(".band_slider-input");
+    var slide1 = parseFloat( slides[0].value );
+    var slide2 = parseFloat( slides[1].value );
+    var slide3 = parseFloat( slides[2].value );
+    var slide4 = parseFloat( slides[3].value );
+    var slide5 = parseFloat( slides[4].value );
+
+    // continuously check the ranges of all the sliders, making sure that
+    // they don't overlap each other and turn negative
+    check1_2();
+    check2_3();
+    check3_4();
+    check4_5();
+
+    var lowCostWifiPct = slide1;
+    var lowCostEthPct = slide2 - slide1;
+    var medCostWifiPct = slide3 - slide2;
+    var medCostEthPct = slide4 - slide3;
+    var highCostWifiPct = slide5 - slide4;
+    var highCostEthPct = 100 - slide5;
+
+    $("#band_lc-eth").text(lowCostEthPct);
+    $("#band_lc-wifi").text(lowCostWifiPct);
+    $("#band_mc-eth").text(medCostEthPct);
+    $("#band_mc-wifi").text(medCostWifiPct);
+    $("#band_hc-eth").text(highCostEthPct);
+    $("#band_hc-wifi").text(highCostWifiPct);
+
+    calculateTotalCost();
+
+    // nested functions for checking the slider handle ranges
+    function check1_2() {
+        if (slide1 > slide2) {
+            var tmp = slide2; slide2 = slide1; slide1 = tmp;
+        }
+    }
+    function check2_3() {
+        if (slide2 > slide3) {
+            var tmp = slide3; slide3 = slide2; slide2 = tmp;
+            check1_2();
+        }
+    }
+    function check3_4() {
+        if (slide3 > slide4) {
+            var tmp = slide4; slide4 = slide3; slide3 = tmp;
+            check2_3();
+        }
+    }
+    function check4_5() {
+        if (slide4 > slide5) {
+            var tmp = slide5; slide5 = slide4; slide4 = tmp;
+            check3_4();
+        }
+    }
 }
 
 
@@ -113,7 +181,7 @@ function calculateTotalCost() {
     $("#elec_medCostPrice").text(elec_medCostPrice);
     $("#elec_highCostPrice").text(elec_highCostPrice);
 
-    // get the device composition
+    // GRID: get device composition
     // var elec_pctLowCostCams = Number($("#elec_lc-cams").val());
     // var elec_pctLowCostDvrs = Number($("#elec_lc-dvrs").val());
     // var elec_pctMedCostCams = Number($("#elec_mc-cams").val());
@@ -122,7 +190,6 @@ function calculateTotalCost() {
     // var elec_pctHighCostDvrs = Number($("#elec_hc-dvrs").val());
     // var elec_pctTotal = elec_pctLowCostCams + elec_pctLowCostDvrs + elec_pctMedCostCams + elec_pctMedCostDvrs + elec_pctHighCostCams + elec_pctHighCostDvrs;
     // $("#elec_percent-total").text(elec_pctTotal);
-
     // calculate number of devices
     // var elec_numLowCostCams = (elec_pctLowCostCams / 100) * numDevices;
     // var elec_numLowCostDvrs = (elec_pctLowCostDvrs / 100) * numDevices;
@@ -137,9 +204,8 @@ function calculateTotalCost() {
     // $("#elec_numHighCostCams").text(Math.round(elec_numHighCostCams));
     // $("#elec_numHighCostDvrs").text(Math.round(elec_numHighCostDvrs));
 
-    // var elec_numHighCost = elec_numHighCostCams +
 
-    // now using slider for electricity
+    // SLIDER: get device composition
     var elec_lowCostPct = Number($("#elec_lowCostPct").text());
     var elec_medCostPct = Number($("#elec_medCostPct").text());
     var elec_highCostPct = Number($("#elec_highCostPct").text());
@@ -148,28 +214,32 @@ function calculateTotalCost() {
     var elec_numMedCost = elec_medCostPct / 100.0 * numDevices;
     var elec_numHighCost = elec_highCostPct / 100.0 * numDevices;
 
-    $("#elec_numLowCost").text(Math.round(elec_numLowCost));
-    $("#elec_numMedCost").text(Math.round(elec_numMedCost));
-    $("#elec_numHighCost").text(Math.round(elec_numHighCost));
+    $("#elec_numLowCost").text(Math.round(elec_numLowCost).toLocaleString());
+    $("#elec_numMedCost").text(Math.round(elec_numMedCost).toLocaleString());
+    $("#elec_numHighCost").text(Math.round(elec_numHighCost).toLocaleString());
 
-    // increased usage in kWh
+    // GRID: increased usage in kWh
     // var elec_lcCamIncreasedUsage = elec_numLowCostCams * elec_camElectricityIncrease;
     // var elec_lcDvrIncreasedUsage = elec_numLowCostDvrs * elec_dvrElectricityIncrease;
     // var elec_mcCamIncreasedUsage = elec_numMedCostCams * elec_camElectricityIncrease;
     // var elec_mcDvrIncreasedUsage = elec_numMedCostDvrs * elec_dvrElectricityIncrease;
     // var elec_hcCamIncreasedUsage = elec_numHighCostCams * elec_camElectricityIncrease;
     // var elec_hcDvrIncreasedUsage = elec_numHighCostDvrs * elec_dvrElectricityIncrease;
+
+    // SLIDER: increased usage in kWh
     var elec_lcIncreasedUsage = elec_numLowCost * elec_electricityIncrease;
     var elec_mcIncreasedUsage = elec_numMedCost * elec_electricityIncrease;
     var elec_hcIncreasedUsage = elec_numHighCost * elec_electricityIncrease;
 
-    // increased cost per device and zone
+    // GRID: increased cost per device and zone
     // var elec_lcCamIncreasedCost = elec_lcCamIncreasedUsage * elec_lowCostPrice;
     // var elec_lcDvrIncreasedCost = elec_lcDvrIncreasedUsage * elec_lowCostPrice;
     // var elec_mcCamIncreasedCost = elec_mcCamIncreasedUsage * elec_medCostPrice;
     // var elec_mcDvrIncreasedCost = elec_mcDvrIncreasedUsage * elec_medCostPrice;
     // var elec_hcCamIncreasedCost = elec_hcCamIncreasedUsage * elec_highCostPrice;
     // var elec_hcDvrIncreasedCost = elec_hcDvrIncreasedUsage * elec_highCostPrice;
+
+    // SLIDER: increased cost per device and zone
     var elec_lcIncreasedCost = elec_lcIncreasedUsage * elec_lowCostPrice;
     var elec_mcIncreasedCost = elec_mcIncreasedUsage * elec_medCostPrice;
     var elec_hcIncreasedCost = elec_hcIncreasedUsage * elec_highCostPrice;
@@ -198,12 +268,12 @@ function calculateTotalCost() {
     $("#band_highCostPrice").text(band_highCostPrice);
 
     // define usage increases, per hour in GB
-    var band_eth_scanIncrease = 0.01953125
-    var band_eth_tcpIncrease = 1.025390625
-    var band_eth_udpIncrease = 6.8
-    var band_wifi_scanIncrease = 0.01953125
-    var band_wifi_tcpIncrease = 0.171875
-    var band_wifi_udpIncrease = 1.3671875
+    var band_eth_scanIncrease = 0.01953125;
+    var band_eth_tcpIncrease = 1.025390625;
+    var band_eth_udpIncrease = 6.8;
+    var band_wifi_scanIncrease = 0.01953125;
+    var band_wifi_tcpIncrease = 0.171875;
+    var band_wifi_udpIncrease = 1.3671875;
 
     // set attack type
     var ethIncrease;
@@ -220,28 +290,28 @@ function calculateTotalCost() {
     }
 
     // get the device composition
-    var band_pctLowCostEth = Number($("#band_lc-eth").val());
-    var band_pctLowCostWifi = Number($("#band_lc-wifi").val());
-    var band_pctMedCostEth = Number($("#band_mc-eth").val());
-    var band_pctMedCostWifi = Number($("#band_mc-wifi").val());
-    var band_pctHighCostEth = Number($("#band_hc-eth").val());
-    var band_pctHighCostWifi = Number($("#band_hc-wifi").val());
+    var band_pctLowCostEth = Number($("#band_lc-eth").text());
+    var band_pctLowCostWifi = Number($("#band_lc-wifi").text());
+    var band_pctMedCostEth = Number($("#band_mc-eth").text());
+    var band_pctMedCostWifi = Number($("#band_mc-wifi").text());
+    var band_pctHighCostEth = Number($("#band_hc-eth").text());
+    var band_pctHighCostWifi = Number($("#band_hc-wifi").text());
     var band_pctTotal = band_pctLowCostEth + band_pctLowCostWifi + band_pctMedCostEth + band_pctMedCostWifi + band_pctHighCostEth + band_pctHighCostWifi;
-    $("#band_percent-total").text(band_pctTotal);
+    // $("#band_percent-total").text(band_pctTotal);
 
     // calculate number of devices
-    var band_numLowCostEth = (band_pctLowCostEth / 100) * numDevices;
-    var band_numLowCostWifi = (band_pctLowCostWifi / 100) * numDevices;
-    var band_numMedCostEth = (band_pctMedCostEth / 100) * numDevices;
-    var band_numMedCostWifi = (band_pctMedCostWifi / 100) * numDevices;
-    var band_numHighCostEth = (band_pctHighCostEth / 100) * numDevices;
-    var band_numHighCostWifi = (band_pctHighCostWifi / 100) * numDevices;
-    $("#band_numLowCostEth").text(Math.round(band_numLowCostEth));
-    $("#band_numLowCostWifi").text(Math.round(band_numLowCostWifi));
-    $("#band_numMedCostEth").text(Math.round(band_numMedCostEth));
-    $("#band_numMedCostWifi").text(Math.round(band_numMedCostWifi));
-    $("#band_numHighCostEth").text(Math.round(band_numHighCostEth));
-    $("#band_numHighCostWifi").text(Math.round(band_numHighCostWifi));
+    var band_numLowCostEth = (band_pctLowCostEth / 100.0) * numDevices;
+    var band_numLowCostWifi = (band_pctLowCostWifi / 100.0) * numDevices;
+    var band_numMedCostEth = (band_pctMedCostEth / 100.0) * numDevices;
+    var band_numMedCostWifi = (band_pctMedCostWifi / 100.0) * numDevices;
+    var band_numHighCostEth = (band_pctHighCostEth / 100.0) * numDevices;
+    var band_numHighCostWifi = (band_pctHighCostWifi / 100.0) * numDevices;
+    $("#band_numLowCostEth").text(Math.round(band_numLowCostEth).toLocaleString());
+    $("#band_numLowCostWifi").text(Math.round(band_numLowCostWifi).toLocaleString());
+    $("#band_numMedCostEth").text(Math.round(band_numMedCostEth).toLocaleString());
+    $("#band_numMedCostWifi").text(Math.round(band_numMedCostWifi).toLocaleString());
+    $("#band_numHighCostEth").text(Math.round(band_numHighCostEth).toLocaleString());
+    $("#band_numHighCostWifi").text(Math.round(band_numHighCostWifi).toLocaleString());
 
     // increased usage in GB
     var band_lcEthIncreasedUsage = band_numLowCostEth * ethIncrease;
@@ -251,6 +321,14 @@ function calculateTotalCost() {
     var band_hcEthIncreasedUsage = band_numHighCostEth * ethIncrease;
     var band_hcWifiIncreasedUsage = band_numHighCostWifi * wifiIncrease;
 
+    console.log('-------------------');
+    console.log(band_lcEthIncreasedUsage);
+    console.log(band_lcWifiIncreasedUsage);
+    console.log(band_mcEthIncreasedUsage);
+    console.log(band_mcWifiIncreasedUsage);
+    console.log(band_hcEthIncreasedUsage);
+    console.log(band_hcWifiIncreasedUsage);
+
     // increased cost per device and zone
     var band_lcEthIncreasedCost = band_lcEthIncreasedUsage * band_lowCostPrice;
     var band_lcWifiIncreasedCost = band_lcWifiIncreasedUsage * band_lowCostPrice;
@@ -259,20 +337,11 @@ function calculateTotalCost() {
     var band_hcEthIncreasedCost = band_hcEthIncreasedUsage * band_highCostPrice;
     var band_hcWifiIncreasedCost = band_hcWifiIncreasedUsage * band_highCostPrice;
 
-    // console.log(band_lcEthIncreasedCost);
-    // console.log(band_lcWifiIncreasedCost);
-    // console.log(band_mcEthIncreasedCost);
-    // console.log(band_mcWifiIncreasedCost);
-    // console.log(band_hcEthIncreasedCost);
-    // console.log(band_hcWifiIncreasedCost);
-
     //  cost per hour across all devices
     var band_increasedCostPerHour = band_lcEthIncreasedCost + band_lcWifiIncreasedCost + band_mcEthIncreasedCost + band_mcWifiIncreasedCost + band_hcEthIncreasedCost + band_hcWifiIncreasedCost;
 
-    // console.log(band_increasedCostPerHour);
-
-    var band_roundedIncreasedCostPerHour = band_increasedCostPerHour.toFixed(2)
-    $("#band_increasedCostPerHour").text(band_roundedIncreasedCostPerHour);
+    var band_roundedIncreasedCostPerHour = +band_increasedCostPerHour.toFixed(2);
+    $("#band_increasedCostPerHour").text(band_roundedIncreasedCostPerHour.toLocaleString());
 
     var band_subtotal = (band_increasedCostPerHour * duration).toFixed(2);
 
@@ -280,8 +349,8 @@ function calculateTotalCost() {
 
     // cost totals
     var totalCost = Number(elec_subtotal) + Number(band_subtotal);
-    var increasedCostPerDevice = totalCost / numDevices;
-    $("#increasedCostPerDevice").text(increasedCostPerDevice.toFixed(2).toLocaleString());
+    var increasedCostPerDevice = (totalCost / numDevices).toFixed(2);
+    $("#increasedCostPerDevice").text(increasedCostPerDevice.toLocaleString());
     $("#totalCost").text(totalCost.toLocaleString());
 
 }
@@ -294,6 +363,7 @@ function krebsAttack() {
     $("#duration").val("77");
     $("#attackType").text("TCP");
 
+    // GRID
     // $("#elec_lc-cams").val(30);
     // $("#elec_lc-dvrs").val(20);
     // $("#elec_mc-cams").val(10);
@@ -301,16 +371,28 @@ function krebsAttack() {
     // $("#elec_hc-cams").val(15);
     // $("#elec_hc-dvrs").val(10);
 
+    // SLIDER
+    // elec
     $("#elec_lowCostPct").text(50);
     $("#elec_medCostPct").text(25);
     $("#elec_highCostPct").text(25);
 
-    $("#band_lc-eth").val(30);
-    $("#band_lc-wifi").val(20);
-    $("#band_mc-eth").val(10);
-    $("#band_mc-wifi").val(15);
-    $("#band_hc-eth").val(15);
-    $("#band_hc-wifi").val(10);
+    $("#slider-left").val(50);
+    $("#slider-right").val(75);
+
+    // band
+    $("#band_lc-wifi").text(20);
+    $("#band_lc-eth").text(30);
+    $("#band_mc-wifi").text(15);
+    $("#band_mc-eth").text(10);
+    $("#band_hc-wifi").text(10);
+    $("#band_hc-eth").text(15);
+
+    $("#slider-1").val(20);
+    $("#slider-2").val(50);
+    $("#slider-3").val(65);
+    $("#slider-4").val(75);
+    $("#slider-5").val(85);
 
     calculateTotalCost();
 }
@@ -320,6 +402,7 @@ function dynAttack() {
     $("#duration").val("6");
     $("#attackType").text("TCP");
 
+    // GRID
     // $("#elec_lc-cams").val(30);
     // $("#elec_lc-dvrs").val(20);
     // $("#elec_mc-cams").val(10);
@@ -327,16 +410,28 @@ function dynAttack() {
     // $("#elec_hc-cams").val(15);
     // $("#elec_hc-dvrs").val(10);
 
+    // SLIDER
+    // elec
     $("#elec_lowCostPct").text(50);
     $("#elec_medCostPct").text(25);
     $("#elec_highCostPct").text(25);
 
-    $("#band_lc-eth").val(15);
-    $("#band_lc-wifi").val(15);
-    $("#band_mc-eth").val(20);
-    $("#band_mc-wifi").val(20);
-    $("#band_hc-eth").val(15);
-    $("#band_hc-wifi").val(15);
+    $("#slider-left").val(50);
+    $("#slider-right").val(75);
+
+    // band
+    $("#band_lc-wifi").text(15);
+    $("#band_lc-eth").text(15);
+    $("#band_mc-wifi").text(20);
+    $("#band_mc-eth").text(20);
+    $("#band_hc-wifi").text(15);
+    $("#band_hc-eth").text(15);
+
+    $("#slider-1").val(15);
+    $("#slider-2").val(30);
+    $("#slider-3").val(50);
+    $("#slider-4").val(70);
+    $("#slider-5").val(85);
 
     calculateTotalCost();
 }
@@ -347,6 +442,7 @@ function worstCaseAttack() {
     $("#duration").val("50");
     $("#attackType").text("UDP");
 
+    // GRID
     // $("#elec_lc-cams").val(1);
     // $("#elec_lc-dvrs").val(4);
     // $("#elec_mc-cams").val(3);
@@ -354,16 +450,28 @@ function worstCaseAttack() {
     // $("#elec_hc-cams").val(55);
     // $("#elec_hc-dvrs").val(35);
 
+    // SLIDER
+    // elec
     $("#elec_lowCostPct").text(5);
     $("#elec_medCostPct").text(5);
     $("#elec_highCostPct").text(90);
 
-    $("#band_lc-eth").val(5);
-    $("#band_lc-wifi").val(5);
-    $("#band_mc-eth").val(5);
-    $("#band_mc-wifi").val(5);
-    $("#band_hc-eth").val(5);
-    $("#band_hc-wifi").val(75);
+    $("#slider-left").val(5);
+    $("#slider-right").val(10);
+
+    // band
+    $("#band_lc-wifi").text(5);
+    $("#band_lc-eth").text(5);
+    $("#band_mc-wifi").text(5);
+    $("#band_mc-eth").text(5);
+    $("#band_hc-wifi").text(5);
+    $("#band_hc-eth").text(75);
+
+    $("#slider-1").val(5);
+    $("#slider-2").val(10);
+    $("#slider-3").val(15);
+    $("#slider-4").val(20);
+    $("#slider-5").val(25);
 
     calculateTotalCost();
 }
