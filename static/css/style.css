@@ -310,7 +310,6 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 .btn-outline:hover, .btn-outline:focus, .btn-outline:active, .btn-outline.active {
     color: white;
     border-color: #3d5a80;
-    /*background-color: #3d5a80;*/
     background-color: rgba(61, 90, 128, 0.7);
 }
 
@@ -335,12 +334,24 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
 
 
 
-
-
 /* custom */
+
+.bg-none {
+    background: transparent !important;
+    border: 0px !important;
+}
+
+.bg-red {
+    background-color: rgba(238, 108, 77, 0.4) !important;
+    border: 1px solid #a32d0f !important;
+}
 
 .center {
     text-align: center;
+}
+
+.left {
+    text-align: left;
 }
 
 .subtitle {
@@ -362,8 +373,8 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
     width: 75%;
 }
 
-input {
-    width: 125px;
+.input-box {
+    width: 135px;
     background-color: rgba(61, 90, 128, 0.1);
     /*border: 0;*/
     border-top: transparent !important;
@@ -376,11 +387,23 @@ input {
     text-align: center;
 }
 
+.input-box.narrow{
+    width: 30%;
+    display: inline-block;
+}
+
 .subtotal {
     font-weight: 800;
     padding-left: 15px;
     font-size: 115%;
     text-align: center;
+}
+
+.percent-total {
+    font-weight: 800;
+    padding-left: 7px !important;
+    padding-bottom: 0 !important;
+    font-size: 125%;
 }
 
 
@@ -393,19 +416,16 @@ input {
 #cost-total {
     text-align: center;
     font-size: 150%;
-    background-color: rgba(238, 108, 77, 0.5);
     border-top: 1px solid #a32d0f !important;
     border-bottom: 1px solid #a32d0f !important;
+    border-left: none !important;
+    border-right: none !important;
+    margin: 20px 0;
 }
 
-.device-pct-col {
-    margin: 0 auto;
-    padding-top: 0;
-    width: 30%;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+#attackType {
+    margin-top: 2px;
+    padding-left: 0;
 }
 
 .calc-col {
@@ -416,6 +436,71 @@ input {
     border: solid 1px #87a2c5;
     border-radius: 5px;
     background-color: rgba(61, 90, 128, 0.05);
+}
+
+.calc-col.wide {
+    width: 96.5%;
+}
+
+.calc-col.slim {
+    width: 50%;
+}
+
+.calc-col.short {
+    height: 100px;
+}
+
+.calc-col-header {
+    padding: 0 0 5px 0;
+    margin: 0;
+    /*margin-bottom: 5px;*/
+    text-transform: uppercase;
+}
+
+.calc-col-body {
+    padding: 0 0 5px 0;
+    width: 100% ;
+    margin: 0 auto;
+}
+
+.calc-dropdown-btn {
+    border: solid 1px #87a2c5;
+    background-color: rgba(61, 90, 128, 0.05);
+}
+
+.no-outline {
+    outline:0 !important;
+    -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.dropdown-menu {
+    padding: 0;
+    text-align: center;
+    border: solid 1px #87a2c5;
+    background-color: rgba(51, 80, 118, 0.7);
+}
+
+.dropdown-item {
+    color: white;
+    padding-top: 1px;
+}
+
+.dropdown-item:active {
+    color: white;
+    /*#293241;*/
+    background-color: rgba(61, 90, 128, 0.7);
+}
+
+.device-pct-col {
+    margin: 0 auto;
+    padding-top: 0;
+    width: 30%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .calc-btn {
@@ -434,19 +519,13 @@ input {
 }
 
 .device-composition {
-    padding: 20px 0;
+    padding: 20px 0 0 0;
     border-radius: 5px;
 }
 
-.calc-col-header {
-    padding: 5px 0 5px 0;
-    text-transform: uppercase;
-}
-
-.calc-col-body {
-    padding: 0 0 15px 0;
-    width: 100% ;
-    margin: 0 auto;
+.device-composition.short {
+    padding: 0;
+    border-radius: 5px;
 }
 
 .cost-calculator {
@@ -493,6 +572,76 @@ input {
          -o-transform:skew(8deg) rotate(3deg);
             transform:skew(8deg) rotate(3deg);
 }
+
+
+/*==================================================
+ * Slider, https://www.w3schools.com/howto/howto_js_rangeslider.asp
+ * ===============================================*/
+
+
+section.range-slider {
+    position: relative;
+    width: 100%;
+    /*height: 50px;*/
+    padding: 0 0 40px 0;
+    text-align: center;
+}
+
+.slider-input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 30px;
+    /*background: #d3d3d3;*/
+    background-color: rgba(61, 90, 128, 0.2);
+    outline: none;
+    /*opacity: 0.7;*/
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+
+    pointer-events: none;
+    position: absolute;
+    /*overflow: hidden;*/
+    left: 0;
+    top: 15px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.slider-input.light {
+    background-color: rgba(61, 90, 128, 0.08);
+}
+
+.slider-input:hover {
+    opacity: 1;
+}
+
+.slider-input::-webkit-slider-thumb {
+    pointer-events: all;
+    position: relative;
+    z-index: 1;
+    outline: 0;
+
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 50px;
+    background-color: rgba(61, 90, 128, 0.45);
+    cursor: pointer;
+
+    border: 3px solid rgba(61, 90, 128, 0.95);
+}
+
+.slider-input::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: red;
+    cursor: pointer;
+}
+
+
+
+
 
 
 /**/
