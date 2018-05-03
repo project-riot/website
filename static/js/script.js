@@ -321,14 +321,6 @@ function calculateTotalCost() {
     var band_hcEthIncreasedUsage = band_numHighCostEth * ethIncrease;
     var band_hcWifiIncreasedUsage = band_numHighCostWifi * wifiIncrease;
 
-    console.log('-------------------');
-    console.log(band_lcEthIncreasedUsage);
-    console.log(band_lcWifiIncreasedUsage);
-    console.log(band_mcEthIncreasedUsage);
-    console.log(band_mcWifiIncreasedUsage);
-    console.log(band_hcEthIncreasedUsage);
-    console.log(band_hcWifiIncreasedUsage);
-
     // increased cost per device and zone
     var band_lcEthIncreasedCost = band_lcEthIncreasedUsage * band_lowCostPrice;
     var band_lcWifiIncreasedCost = band_lcWifiIncreasedUsage * band_lowCostPrice;
