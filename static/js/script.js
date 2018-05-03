@@ -71,6 +71,17 @@
         $('#attackType').text(this.innerHTML);
         calculateTotalCost();
     });
+
+    $(".calc-btn").click(function() {
+        if ($(this).hasClass('active')) {
+            $(".calc-btn").removeClass('active');
+            resetDefaultCalcSettings();
+        } else {
+            $(".calc-btn").removeClass('active');
+            $(this).addClass('active');
+        }
+    });
+
 })(jQuery); // End of use strict
 
 
@@ -464,6 +475,38 @@ function worstCaseAttack() {
     $("#slider-3").val(15);
     $("#slider-4").val(20);
     $("#slider-5").val(25);
+
+    calculateTotalCost();
+}
+
+function resetDefaultCalcSettings() {
+    $("#numDevices").val("55000");
+    $("#duration").val("4");
+    $("#attackType").text("TCP");
+
+
+    // SLIDER
+    // elec
+    $("#elec_lowCostPct").text(33);
+    $("#elec_medCostPct").text(33);
+    $("#elec_highCostPct").text(34);
+
+    $("#slider-left").val(33);
+    $("#slider-right").val(66);
+
+    // band
+    $("#band_lc-wifi").text(10);
+    $("#band_lc-eth").text(20);
+    $("#band_mc-wifi").text(30);
+    $("#band_mc-eth").text(10);
+    $("#band_hc-wifi").text(20);
+    $("#band_hc-eth").text(10);
+
+    $("#slider-1").val(10);
+    $("#slider-2").val(30);
+    $("#slider-3").val(60);
+    $("#slider-4").val(70);
+    $("#slider-5").val(90);
 
     calculateTotalCost();
 }

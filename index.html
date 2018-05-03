@@ -15,14 +15,11 @@
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <!-- <link rel="heet" href="static/vendor/font-awesome/css/font-awesome.min.css"> -->
-    <!-- <link rel="stylesheet" href="static/vendor/simple-line-icons/css/simple-line-icons.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <!-- <link href="css/new-age.min.css" rel="stylesheet"> -->
     <link href="static/css/style.css" rel="stylesheet">
 
     <!-- Theme Copyright 2013-2018 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-new-age/blob/gh-pages/LICENSE) license. -->
@@ -77,11 +74,11 @@
           </div>
           <div class="col-lg-5 my-auto">
             <div>
-                <h4 class="mb-5">
+                <h5 class="mb-5">
                     Internet of Things devices are everywhere. Unfortunately, many Internet-connected devices are built with inadequate security measures, making them easy targets for cybercriminals. Hackers enlist these insecure devices in “botnet” armies to launch massive cyberattacks on governments, infrastructure, and businesses, causing millions of dollars in lost revenue, damaged brand reputation, and degraded service.
                     <br><br>
                     But what happens to the owners of the devices? What costs do they bear as a result of their devices being hacked? Do their electricity and bandwidth bills increase when their devices are used in attacks? And what can consumers and regulators do to ensure that manufacturers improve device security to prevent these attacks in the future?
-                </h4>
+                </h5>
             </div>
           </div>
 
@@ -117,25 +114,38 @@
       <div class="container">
         <div class="section-heading text-center">
           <h2>IoT DDoS Consumer Cost Calculator</h2>
-          <p class="text-muted">Explore the Costs of DDoS Attacks on Consumers</p>
+          <p class="text-muted">Explore the Costs to Consumers of IoT DDoS Attacks</p>
           <br>
         </div>
         <div class="row">
             <div class="cost-calculator effect8">
-                <!-- <div class="calc-header wide">
-                        <small class="calc-col-header">Adjust the calculator to compute costs, or select a preset attack profile <br>
-                        </small>
 
-                    <br>
-                </div> -->
-                <br>
+                <p style="text-align:center;">
+                    <small class="calc-col-header">Adjust the calculator to compute costs, or select a preset attack profile</small>
+                </p>
+                <div class="row">
+                    <span class="btn btn-outline btn-xl calc-btn" onclick="krebsAttack()">
+                        KrebsOnSecurity Attack
+                    </span>
+                    <span class="btn btn-outline btn-xl calc-btn" onclick="dynAttack()">
+                        Dyn, Inc. Attack
+                    </span>
+                    <span class="btn btn-outline btn-xl calc-btn" onclick="worstCaseAttack()">
+                        Worst-Case Attack
+                    </span>
+                </div>
+
+                <div class="bg-red" id="cost-total" >
+                    TOTAL CONSUMER RESOURCE COST <br>
+                    <b>$<span id="totalCost">x</span></b>
+                </div>
 
                 <!-- ELECTRICITY GRID -->
 
                  <div class="row">
                     <div class="calc-col">
                         <p class="calc-col-header">
-                            Total Distribution of devices
+                            Total Number of devices
                         </p>
                         <p class="calc-col-body subtotal">
                             <input type="number" name="Distribution of devices" class="input-box" id="numDevices" value="55000" onchange="calculateTotalCost()">
@@ -146,13 +156,16 @@
                             attack duration
                         </p>
                         <p class="calc-col-body">
-                            <input type="number" name="attack-duration" class="input-box device-pct-col" id="duration" value="4" onchange="calculateTotalCost()"> hours
+                            <input type="number" name="attack-duration" class="input-box narrow" id="duration" value="4" onchange="calculateTotalCost()"> hours
                         </p>
                     </div>
                     <div class="calc-col">
+                        <p class="calc-col-header">
+                            attack type
+                        </p>
                         <div class="dropdown center ">
-                            <button class="btn btn-outline dropdown-toggle calc-dropdown-btn no-bg calc-col-header no-outline" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Attack Type:
+                            <button class="btn btn-outline dropdown-toggle calc-dropdown-btn bg-none calc-col-body no-outline" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="attackType" class="input-box narrow bg-none">TCP</span>
                             </button>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -161,8 +174,8 @@
                                 <li><span class="dropdown-item">Scan</span></li>
                             </div>
                         </div>
-                        <p class="calc-col-body">
-                            <span id="attackType" class="input-box device-pct-col no-bg">TCP</span>
+
+
                         </p>
                     </div>
                 </div>
@@ -183,7 +196,7 @@
                         </section>
                         <br>
                         <div class="row device-composition short">
-                            <div class="calc-col no-bg ">
+                            <div class="calc-col bg-none ">
                                 <p class="calc-col-body percent-total">
                                     <span id="elec_lowCostPct">x</span>%
                                 </p>
@@ -193,7 +206,7 @@
                                 </p>
 
                             </div>
-                            <div class="calc-col no-bg ">
+                            <div class="calc-col bg-none ">
                                 <p class="calc-col-body percent-total">
                                     <span id="elec_medCostPct">x</span>%
                                 </p>
@@ -203,7 +216,7 @@
                                 </p>
 
                             </div>
-                            <div class="calc-col no-bg ">
+                            <div class="calc-col bg-none ">
                                 <p class="calc-col-body percent-total">
                                     <span id="elec_highCostPct">x</span>%
                                 </p>
@@ -310,14 +323,14 @@
                         </section>
                         <br>
                         <div class="row device-composition short">
-                            <div class="calc-col no-bg">
+                            <div class="calc-col bg-none">
 
                                 <!-- LOW COST BANDWIDTH -->
                                 <p class="calc-col-header">
                                     low-cost zone (<small>$<span id="band_lowCostPrice">x</span> per GB)</small>
                                 </p>
                                 <div class="row device-composition short">
-                                    <div class="calc-col slim no-bg">
+                                    <div class="calc-col slim bg-none">
                                         <p class="calc-col-body percent-total">
                                             <span id="band_lc-wifi">x</span>%
                                         </p>
@@ -326,7 +339,7 @@
                                             <small><i><span id="band_numLowCostWifi">x</span> devices</i></small>
                                         </p>
                                     </div>
-                                    <div class="calc-col slim no-bg">
+                                    <div class="calc-col slim bg-none">
                                         <p class="calc-col-body percent-total">
                                             <span id="band_lc-eth">x</span>%
                                         </p>
@@ -339,12 +352,12 @@
                             </div>
 
                             <!-- MED COST BANDWIDTH -->
-                            <div class="calc-col no-bg">
+                            <div class="calc-col bg-none">
                                 <p class="calc-col-header">
                                     med-cost zone (<small>$<span id="band_medCostPrice">x</span> per GB)</small>
                                 </p>
                                 <div class="row device-composition short">
-                                    <div class="calc-col slim no-bg">
+                                    <div class="calc-col slim bg-none">
                                         <p class="calc-col-body percent-total">
                                             <span id="band_mc-wifi">x</span>%
                                         </p>
@@ -353,7 +366,7 @@
                                             <small><i><span id="band_numMedCostWifi">x</span> devices</i></small>
                                         </p>
                                     </div>
-                                    <div class="calc-col slim no-bg">
+                                    <div class="calc-col slim bg-none">
                                         <p class="calc-col-body percent-total">
                                             <span id="band_mc-eth">x</span>%
                                         </p>
@@ -366,12 +379,12 @@
                             </div>
 
                             <!-- HIGH COST BANDWIDTH -->
-                            <div class="calc-col no-bg">
+                            <div class="calc-col bg-none">
                                 <p class="calc-col-header">
                                     high-cost zone (<small>$<span id="band_highCostPrice">x</span> per GB)</small>
                                 </p>
                                 <div class="row device-composition short">
-                                    <div class="calc-col slim no-bg">
+                                    <div class="calc-col slim bg-none">
                                         <p class="calc-col-body percent-total">
                                             <span id="band_hc-wifi">x</span>%
                                         </p>
@@ -380,7 +393,7 @@
                                             <small><i><span id="band_numHighCostWifi">x</span> devices</i></small>
                                         </p>
                                     </div>
-                                    <div class="calc-col slim no-bg">
+                                    <div class="calc-col slim bg-none">
                                         <p class="calc-col-body percent-total">
                                             <span id="band_hc-eth">x</span>%
                                         </p>
@@ -474,48 +487,30 @@
 
 
                 <div class="row device-composition">
-                    <div class="calc-col">
+                    <div class="calc-col bg-red">
                         <p class="calc-col-header">
-                            increased electricity usage cost per hour
+                            electricity cost per hour
                         </p>
                         <p class="calc-col-body subtotal">
                             $<span id="elec_increasedCostPerHour">x</span>
                         </p>
                     </div>
-                    <div class="calc-col">
+                    <div class="calc-col bg-red">
                         <p class="calc-col-header">
-                            increased bandwidth usage cost per hour
+                            bandwidth cost per hour
                         </p>
                         <p class="calc-col-body subtotal">
                             $<span id="band_increasedCostPerHour">x</span>
                         </p>
                     </div>
-                    <div class="calc-col">
+                    <div class="calc-col bg-red">
                         <p class="calc-col-header">
-                            total cost per <br> compromised device
+                            cost per device
                         </p>
                         <p class="calc-col-body subtotal">
                             $<span id="increasedCostPerDevice">x</span>
                         </p>
                     </div>
-                </div>
-                <br>
-                <div id="cost-total">
-                    TOTAL CONSUMER RESOURCE COST <br>
-                    <b>$<span id="totalCost">x</span></b>
-                </div>
-                <br>
-                <p style="text-align:center;">CASE STUDIES</p>
-                <div class="row">
-                    <span class="btn btn-outline btn-xl calc-btn" onclick="krebsAttack()">
-                        KrebsOnSecurity Attack
-                    </span>
-                    <span class="btn btn-outline btn-xl calc-btn" onclick="dynAttack()">
-                        Dyn, Inc. Attack
-                    </span>
-                    <span class="btn btn-outline btn-xl calc-btn" onclick="worstCaseAttack()">
-                        Worst-Case Attack
-                    </span>
                 </div>
             </div>
         </div>
@@ -566,7 +561,6 @@
     <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <!-- <script src="js/new-age.min.js"></script> -->
     <script src="static/js/script.js"></script>
 
   </body>
