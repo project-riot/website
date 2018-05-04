@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>rIoT</title>
-    <link href="static/img/favicon-b.ico" type="image/x-icon" rel="icon">
+    <link href="static/img/favicon.ico" type="image/x-icon" rel="icon">
 
     <!-- Bootstrap core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -140,7 +140,7 @@
                     <b>$<span id="totalCost">x</span></b>
                 </div>
 
-                <!-- ELECTRICITY GRID -->
+                <!-- ATTACK CHARACTERISTICS -->
 
                  <div class="row">
                     <div class="calc-col">
@@ -232,80 +232,7 @@
                 </div>
 
 
-                <!-- <div class="row device-composition">
-                    <div class="calc-col">
-                        <div class="calc-col-header">
-                            % Devices in a <br>
-                            <strong>Low Cost Electricity Zone</strong><br>
-                            (<small>$<span id="elec_lowCostPrice">x</span> per kWh)</small>
-                        </div>
-                        <div class="calc-col-body">
-                            <div class="row">
-                                <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="elec_low-cost-cameras" id="elec_lc-cams" class="input-box device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="elec_numLowCostCams">x</span> devices</i></small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="elec_low-cost-dvrs" id="elec_lc-dvrs" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="elec_numLowCostDvrs">x</span> devices</i></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calc-col">
-                        <div class="calc-col-header">
-                            % Devices in a <br>
-                            <strong>Medium Cost Electricity Zone</strong><br>
-                            <small>($<span id="elec_medCostPrice">x</span> per kWh)</small>
-                        </div>
-                        <div class="calc-col-body">
-                            <div class="row">
-                                <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="elec_med-cost-cameras" id="elec_mc-cams" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="elec_numMedCostCams">x</span> devices</i></small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="elec_med-cost-dvrs" id="elec_mc-dvrs" class="input-box device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="elec_numMedCostDvrs">x</span> devices</i></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calc-col">
-                        <div class="calc-col-header">
-                            % Devices in a <br>
-                            <strong>High Cost Electricity Zone</strong><br>
-                            <small>($<span id="elec_highCostPrice">x</span> per kWh)</small>
-                        </div>
-                        <div class="calc-col-body">
-                            <div class="row">
-                                <div class="device-pct-col">% Cameras</div>
-                                <input type="number" name="elec_high-cost-cameras" id="elec_hc-cams" class="input-box device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="elec_numHighCostCams">x</span> devices</i></small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="device-pct-col">% DVRs</div>
-                                <input type="number" name="elec_high-cost-dvrs" id="elec_hc-dvrs" class="input-box device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="elec_numHighCostDvrs">x</span> devices</i></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
-                <!-- BANDWIDTH CONSUMPTION -->
+                <!-- BANDWIDTH CONSUMPTION SLIDERS -->
 
                 <br>
                 <div class="row">
@@ -411,85 +338,13 @@
 
                 </div>
 
-                <!-- BANDWIDTH GRID -->
-
-                <!-- <div class="row device-composition">
-                    <div class="calc-col">
-                        <div class="calc-col-header">
-                            % Devices in a <br>
-                            <strong>Low Cost Bandwidth Zone</strong><br>
-                            (<small>$<span id="band_lowCostPrice">x</span> per GB)</small>
-                        </div>
-                        <div class="calc-col-body">
-                            <div class="row">
-                                <div class="device-pct-col">% Ethernet</div>
-                                <input type="number" name="band_low-cost-eth" id="band_lc-eth" class="input-box device-pct-col" min="0" max="100"  value="30" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="band_numLowCostEth">x</span> devices</i></small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="device-pct-col">% WiFi</div>
-                                <input type="number" name="band_low-cost-wifi" id="band_lc-wifi" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="band_numLowCostWifi">x</span> devices</i></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calc-col">
-                        <div class="calc-col-header">
-                            % Devices in a <br>
-                            <strong>Medium Cost Bandwidth Zone</strong><br>
-                            <small>($<span id="band_medCostPrice">x</span> per GB)</small>
-                        </div>
-                        <div class="calc-col-body">
-                            <div class="row">
-                                <div class="device-pct-col">% Ethernet</div>
-                                <input type="number" name="band_med-cost-eth" id="band_mc-eth" class="input-box device-pct-col" min="0" max="100"  value="20" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="band_numMedCostEth">x</span> devices</i></small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="device-pct-col">% WiFi</div>
-                                <input type="number" name="band_med-cost-wifi" id="band_mc-wifi" class="input-box device-pct-col" min="0" max="100"  value="15" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="band_numMedCostWifi">x</span> devices</i></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calc-col">
-                        <div class="calc-col-header">
-                            % Devices in a <br>
-                            <strong>High Cost Bandwidth Zone</strong><br>
-                            <small>($<span id="band_highCostPrice">x</span> per GB)</small>
-                        </div>
-                        <div class="calc-col-body">
-                            <div class="row">
-                                <div class="device-pct-col">% Ethernet</div>
-                                <input type="number" name="band_high-cost-eth" id="band_hc-eth" class="input-box device-pct-col" min="0" max="100"  value="10" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="band_numHighCostEth">x</span> devices</i></small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="device-pct-col">% WiFi</div>
-                                <input type="number" name="band_high-cost-wifi" id="band_hc-wifi" class="input-box device-pct-col" min="0" max="100"  value="5" onchange="calculateTotalCost()">
-                                <div class="device-pct-col">
-                                    <small><i><span id="band_numHighCostWifi">x</span> devices</i></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
-                <div class="row device-composition">
+                <!-- SUBTOTALS -->
+                
+		<div class="row device-composition">
                     <div class="calc-col bg-red">
                         <p class="calc-col-header">
-                            electricity cost per hour
+                            total electricity cost per hour<br>
+                            <small>(imposed on consumers in aggregate)</small>
                         </p>
                         <p class="calc-col-body subtotal">
                             $<span id="elec_increasedCostPerHour">x</span>
@@ -497,7 +352,8 @@
                     </div>
                     <div class="calc-col bg-red">
                         <p class="calc-col-header">
-                            bandwidth cost per hour
+                            total bandwidth cost per hour<br>
+                            <small>(imposed on consumers in aggregate)</small>
                         </p>
                         <p class="calc-col-body subtotal">
                             $<span id="band_increasedCostPerHour">x</span>
@@ -505,7 +361,8 @@
                     </div>
                     <div class="calc-col bg-red">
                         <p class="calc-col-header">
-                            cost per device
+                            cost per device<br>
+                            <small>(imposed on a consumer by each device)</small>
                         </p>
                         <p class="calc-col-body subtotal">
                             $<span id="increasedCostPerDevice">x</span>
@@ -524,7 +381,7 @@
             <h2 class="section-heading">Read the Full Report</h2>
             <p>Learn more about our research design, methodology, and findings in the full report.</p>
             <div class="badges">
-                <a href="static/rIoT_report.pdf" download="rIoT_report.pdf" class="btn btn-outline btn-xl btn-clear js-scroll-trigger">Download the Report</a>
+                <a href="https://drive.google.com/uc?id=1IivZwRbnQmEpIC6C3gYGPucxnxluIwuW&export=download" class="btn btn-outline btn-xl btn-clear js-scroll-trigger">Download the Report</a>
             </div>
           </div>
         </div>
